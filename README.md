@@ -201,7 +201,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
   1. Handle separately and in this order the cases of 
     * Empty list
     * The first element of the list
-    * All the rest of the elements
+    * All the rest of the elements 
   2. When traversing the list keep track of two variables
     * A pointer to the current element (e.g. `curr`)
     * A poitner to the previous element (e.g. `prev`)
