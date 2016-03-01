@@ -7,13 +7,9 @@
 using namespace Clustering;
 namespace Clustering
 {
-
 	typedef Point * PointPtr;
 
-
 	LNode::LNode(const Point &p, LNodePtr n) : point(p), next(n) {}
-
-
 
 	Cluster::Cluster()
 	{
@@ -55,7 +51,7 @@ namespace Clustering
 		return *this;
 	}
 
-	Cluster::~Cluster() // dtor
+	Cluster::~Cluster()
 	{	if (__points != NULL) 
 		{
 			LNodePtr prevPtr = __points;
@@ -125,8 +121,7 @@ namespace Clustering
 	 if (prev->next == NULL)
 		{
 			if (prev->point == cIn)
-			{
-				
+			{	
 				__points = NULL;
 				__size = 0;
 				delete prev;
@@ -169,7 +164,7 @@ namespace Clustering
 
 		LNodePtr current = __points;
 
-		for (; !found && current != NULL; current = current->next)
+		for (current ; !found && current != NULL; current = current->next)
 			if (current->point == cIn)
 			{				
 				found = true;
@@ -204,7 +199,6 @@ namespace Clustering
 	Cluster &Cluster::operator-=(const Point &cIn)
 	{
 		remove(cIn);
-
 		return *this;
 	}
 	
@@ -218,7 +212,6 @@ namespace Clustering
 			if (!(this->contains(current_rhs->point)))
 				add(current_rhs->point);
 		}
-
 		return *this;
 	}
 
@@ -232,7 +225,6 @@ namespace Clustering
 			if ((this->contains(current_rhs->point)))
 				remove(current_rhs->point);
 		}
-
 		return *this;
 	}
 
@@ -244,24 +236,21 @@ namespace Clustering
 		{
 			for (current; &current->point != NULL; current = current->next)
 			{
-				
 				os << current->point;
 				if (&current->next != NULL)
 					os << "\n";
 			}
 		}
-
 		return os;
 	}
 
 	std::istream &operator>>(std::istream &istream, Clustering::Cluster &cluster)
 	{
 		std::string line;
-		while (getline(istream, line)) {
-			int d = std::count(line.begin(),
-				line.end(),
-				',');
-			Point *pointPtr = new Clustering::Point(d + 1);
+		while (getline(istream, line))
+		{
+			int d = std::count(line.begin(),line.end(),',');
+			Point *pointPtr = new Point(d + 1);
 			std::stringstream lineStream(line);
 
 			lineStream >> *pointPtr;
@@ -293,12 +282,9 @@ namespace Clustering
 		return equal;
 	}
 
-
-
 	const Cluster operator+(const Cluster &clusterIn, const Point &cIn)
 	{
 		Cluster newCluster(clusterIn);
-
 		return newCluster += cIn;
 	}
 
@@ -310,21 +296,18 @@ namespace Clustering
 	const Cluster operator-(const Cluster &clusterIn, const Point &cIn)
 	{
 		Cluster newCluster(clusterIn);
-
 		return newCluster -= cIn;
 	}
 
 	const Cluster operator-(const Cluster &lhs, const Cluster &rhs) // (asymmetric) difference
 	{
 		Cluster newCluster(lhs);
-
 		return newCluster -= rhs;
 	}
 
 	const Cluster operator+(const Cluster &lhs, const Cluster &rhs) // union
 	{
 		Cluster newCluster(lhs);
-
 		return newCluster += rhs;
 	}
 
