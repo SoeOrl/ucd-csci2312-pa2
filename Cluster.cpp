@@ -187,7 +187,7 @@ namespace Clustering
 
 			return current->point;
 		}
-		else return NULL;
+		
 	}
 
 	Cluster &Cluster::operator+=(const Point &point)
